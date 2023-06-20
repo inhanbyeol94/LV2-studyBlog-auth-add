@@ -7,9 +7,10 @@ const authMiddleware = require('../middlewares/auth');
 //single read [post, comment]
 app.get('/', async (req, res) => {
   try {
-    res.json({ post: await db.findOne('post', { postId: req.query.id }, { password: 0 }), comments: (await db.find('comment', { postId: req.query.id }, { password: 0 })).sort((a, b) => new Date(b.date) - new Date(a.date)) });
+    res.status(200).json({ post: await db.findOne('post', { postId: req.query.id }, { password: 0 }), comments: (await db.find('comment', { postId: req.query.id }, { password: 0 })).sort((a, b) => new Date(b.date) - new Date(a.date)) });
   } catch (err) {
-    return res.json(err);
+    console.error(err);
+    return res.status(400).json({ message: '게시물 상세 정보를 불러오는데 실패하였습니다.' });
   }
 });
 
@@ -76,7 +77,8 @@ app.delete('/delete', authMiddleware, async (req, res) => {
     if (!result.acknowledged) return res.status(401).json({ message: '게시글 삭제를 실패하였습니다.' });
     return res.status(201).json({ message: '정상 삭제되었습니다.' });
   } catch (err) {
-    return res.json(err);
+    console.error(err);
+    return res.status(400).json({ message: '게시글 삭제를 실패하였습니다.' });
   }
 });
 

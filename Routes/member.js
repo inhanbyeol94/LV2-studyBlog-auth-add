@@ -28,10 +28,13 @@ app.post('/register', async (req, res) => {
     if (overlapToCheck) return res.status(412).json({ message: '입력한 id혹은 nickname이 중복된 값입니다.' });
 
     const passwordToCrypto = crypto.pbkdf2Sync(password, SECRET_KEY.toString('hex'), 11524, 64, 'sha512').toString('hex');
-    const result = await db.create('member', { id, nickname, password: passwordToCrypto });
-    result ? res.status(201).json({ message: '정상 등록되었습니다.' }) : res.status(400).json({ message: '오류가 발생했습니다.' });
+
+    await db.create('member', { id, nickname, password: passwordToCrypto });
+
+    res.status(201).json({ message: '정상 등록되었습니다.' });
   } catch (err) {
-    return res.status(400).json(err);
+    console.error(err);
+    return res.status(400).json({ message: '오류가 발생했습니다.' });
   }
 });
 
@@ -53,15 +56,8 @@ app.post('/login', async (req, res) => {
     res.cookie('auth', `Bearer ${token}`);
     return res.status(200).json({ message: '로그인 성공' });
   } catch (err) {
-    return res.status(400).json(err);
-  }
-});
-
-app.get('/login', async (req, res) => {
-  try {
-    return res.json(req.header.cookie);
-  } catch (err) {
-    return res.json(err);
+    console.error(err);
+    return res.status(400).json({ message: '로그인 도중 오류가 발생하였습니다.' });
   }
 });
 
