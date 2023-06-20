@@ -1,16 +1,16 @@
 # API
 
-<table style="width: 100%">
+<table>
 <tbody>
-<tr style="height: 23px;">
-<td style="height: 23px; width: 73px;">fn</td>
-<td style="height: 23px; width: 119px;">API</td>
-<td style="height: 23px; width: 58px;">Method</td>
-<td style="height: 23px; width: 128px;">req</td>
-<td style="height: 23px; width: 206px;">res</td>
-<td style="height: 23px; width: 118px;">reqHeader</td>
-<td style="height: 23px; width: 117.172px;">resHeader</td>
-<td style="height: 23px; width: 195.828px;">resErr</td>
+<tr>
+<td>fn</td>
+<td>API</td>
+<td>Method</td>
+<td>req</td>
+<td>res</td>
+<td>reqHeader</td>
+<td>resHeader</td>
+<td>resErr</td>
 </tr>
 <tr style="height: 23px;">
 <td style="height: 23px; width: 73px;">게시글 전체 조회</td>
