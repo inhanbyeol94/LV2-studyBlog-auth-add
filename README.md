@@ -1,6 +1,6 @@
 # API
 
-<table style="width: 1020px;">
+<table style="width: 100%">
 <tbody>
 <tr style="height: 23px;">
 <td style="height: 23px; width: 73px;">fn</td>
